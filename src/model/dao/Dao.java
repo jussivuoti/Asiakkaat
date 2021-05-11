@@ -18,7 +18,8 @@ public class Dao {
 	private Connection yhdista() {
 		Connection con = null;
 		String path = System.getProperty("catalina.base");
-		path = path.substring(0, path.indexOf(".metadata")).replace("\\", "/"); // Eclipsessa
+		path = "C:\\CODE\\Ohjelmointi 2 SWD4TA033-3005\\Asiakkaat_2\\";
+		//path = path.substring(0, path.indexOf(".metadata")).replace("\\", "/"); // Eclipsessa
 		// System.out.println("Polku on: " + path);
 		// path += "/webapps/"; //Tuotannossa. Laita kanta webapps-kansioon.
 		String url = "jdbc:sqlite:" + path + db;
@@ -157,7 +158,7 @@ public class Dao {
 	
 	public boolean muutaAsiakas(Asiakas asiakas) {
 		boolean paluuArvo = true;
-		sql = "UPDATE asiakkaat SET etunimi=?, sukunimi=?, puhelin=?, sposti=? WHERE asiakas_id=?";
+		sql = "UPDATE asiakkaat SET etunimi=?, sukunimi=?, puhelin=?, sposti=? WHERE asiakas_id="+String.valueOf(asiakas.getAsiakas_id());
 		try {
 			con = yhdista();
 			stmtPrep = con.prepareStatement(sql);
@@ -165,7 +166,6 @@ public class Dao {
 			stmtPrep.setString(2, asiakas.getSukunimi());
 			stmtPrep.setString(3, asiakas.getPuhelin());
 			stmtPrep.setString(4, asiakas.getSposti());
-			stmtPrep.setInt(5, asiakas.getAsiakas_id());
 			stmtPrep.executeUpdate();
 			con.close();
 		} catch (Exception e) {
