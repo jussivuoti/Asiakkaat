@@ -1,4 +1,3 @@
-
 function requestURLParam(sParam){
     var sPageURL = window.location.search.substring(1);
     var sURLVariables = sPageURL.split("&");
@@ -16,5 +15,13 @@ function formDataJsonStr(formArray) {
 	}
 	return JSON.stringify(returnArray);
 }
+
+function siivoa(teksti){
+	teksti=teksti.replace("<","");
+	teksti=teksti.replace(";","");
+	teksti=teksti.replace("'","''");
+	return teksti;
+}
+
 
 
